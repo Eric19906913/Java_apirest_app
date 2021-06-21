@@ -1,0 +1,58 @@
+package com.Apirest.DAO;
+
+import java.util.List;
+
+import javax.persistence.EntityManager;
+import javax.persistence.TypedQuery;
+
+import org.hibernate.Session;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
+
+import com.Apirest.Entity.User;
+
+@Repository
+public class UserDAOImpl implements UserDAO{
+
+	@Autowired
+	EntityManager entityManager;
+	
+	@Override
+	public List<User> getAll() {
+		Session currentSession = entityManager.unwrap(Session.class);
+		
+		TypedQuery<User> query = currentSession.createQuery("from User", User.class);
+		
+		List<User> usersList = query.getResultList();
+		return usersList;
+	}
+
+	@Override
+	public User getById(int userId) {
+		Session currentSession = entityManager.unwrap(Session.class);
+		
+		User user =  currentSession.get(User.class, userId);
+		
+		return user;
+	}
+
+	@Override
+	public int deleteUser(User user) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public User updateUser(User user) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void save(User user) {
+		Session currentSession = entityManager.unwrap(Session.class);
+		
+		currentSession.save(user);
+	}
+
+}
