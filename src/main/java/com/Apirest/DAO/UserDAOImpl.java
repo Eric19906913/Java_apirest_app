@@ -1,9 +1,12 @@
 package com.Apirest.DAO;
 
+import java.sql.ResultSet;
 import java.util.List;
+
 
 import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
+import javax.transaction.Transactional;
 
 import org.hibernate.Session;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -49,10 +52,33 @@ public class UserDAOImpl implements UserDAO{
 	}
 
 	@Override
+	@Transactional
 	public void save(User user) {
 		Session currentSession = entityManager.unwrap(Session.class);
 		
-		currentSession.save(user);
+		String query = "INSERT INTO users (name, email, phone, password, user_name) VALUES(?, ?, ?, ?, ?)";
+		
+		currentSession.createNativeQuery(query)
+			.setParameter(1, user.getName())
+			.setParameter(2, user.getEmail())
+			.setParameter(3, user.getPhone())
+			.setParameter(4, user.getPassword())
+			.setParameter(5, user.getUsername())
+			.executeUpdate();
+	}
+
+	@Override
+	public User getByEmail(String email) {
+		Session currentSession = entityManager.unwrap(Session.class);
+		
+		String query = "SELECT * FROM users WHERE email=?";
+		
+		var user = currentSession.createNativeQuery(query)
+			.setParameter(1, email);
+		
+		System.out.println(user.toString());
+		
+		return null;
 	}
 
 }

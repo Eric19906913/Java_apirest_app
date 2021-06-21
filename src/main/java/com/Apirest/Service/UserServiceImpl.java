@@ -1,10 +1,12 @@
 package com.Apirest.Service;
 
 import java.util.Date;
+
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import com.Apirest.DAO.UserDAO;
 import com.Apirest.Entity.User;
@@ -14,6 +16,8 @@ public class UserServiceImpl implements UserService{
 	
 	@Autowired
 	UserDAO userDao;
+	//this is for encrypt passwords.
+	BCryptPasswordEncoder bcrypt = new BCryptPasswordEncoder();
 	
 	@Override
 	public List<User> getAll() {
@@ -23,19 +27,17 @@ public class UserServiceImpl implements UserService{
 
 	@Override
 	public User getById(int id) {
-		List<User> userList = getAll();
-		for(User user : userList) {
-			if(user.getId() == id) {
-				return user;
-			}
+		User user = userDao.getById(id);
+		if(user != null) {
+			return user;
 		}
 		return null;
 	}
 
 	@Override
 	public User getByEmail(String email) {
-		// TODO Auto-generated method stub
-		return null;
+		User user = userDao.getByEmail(email);
+		return user;
 	}
 
 	@Override
@@ -58,8 +60,23 @@ public class UserServiceImpl implements UserService{
 
 	@Override
 	public User saveUser(User user) {
+		//this service is gonna have more logic, like verify for an existing user and so.
+		//TODO ..
+		
+		String encryptPassword = bcrypt.encode(user.getPassword());
+		user.setPassword(encryptPassword);
+		
 		userDao.save(user);
-		return null;
+		
+		return user;
+	}
+	
+	@Override
+	public boolean canLogin(String password, User loginUser) {
+		//this is for verify if the password matchs
+		boolean passwordVerify = bcrypt.matches(password, loginUser.getPassword()); 
+		
+		return passwordVerify;
 	}
 
 }

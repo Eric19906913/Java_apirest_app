@@ -13,4 +13,5 @@ public interface UserService {
 	public int update(User user);
 	public User getByDate(Date birthday);
 	public User saveUser(User user);
+	public boolean canLogin(String password, User loginUser);
 }

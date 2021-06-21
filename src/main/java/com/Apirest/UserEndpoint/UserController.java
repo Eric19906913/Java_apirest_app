@@ -38,12 +38,28 @@ public class UserController {
 		return user;
 	}
 	
-	@PostMapping(path="users", produces= {"application/json"})
+	@PostMapping(path="/users", produces= {"application/json"})
 	public User saveUser(@RequestBody User user) {
 		user.setId(0);
 		
 		userService.saveUser(user);
 		
 		return user;
+	}
+	
+	@PostMapping(path="/users/login", produces= {"application/json"})
+	public boolean login(@RequestBody User user) {
+		String password = user.getPassword();
+		String email = user.getEmail();
+		
+		User loginUser = userService.getByEmail(email);
+		
+		if(loginUser == null) {
+			return false;
+		}
+		
+		boolean canLogin = userService.canLogin(password , loginUser);
+		
+		return canLogin;
 	}
 }

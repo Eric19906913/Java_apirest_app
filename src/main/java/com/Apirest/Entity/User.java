@@ -30,7 +30,7 @@ public class User {
 	private String password;
 	
 	@Column(name="userName")
-	private String userName;
+	private String user_name;
 	
 	@Column(name="phone")
 	private String phone;
@@ -82,10 +82,10 @@ public class User {
 	}
 	//getter and setter for username
 	public String getUsername() {
-		return this.userName;
+		return this.user_name;
 	}
-	public void getUsername(String userName) {
-		this.userName = userName;
+	public void setUsername(String userName) {
+		this.user_name = userName;
 	}
 	//getter and setter for phone number
 	public String getPhone() {
