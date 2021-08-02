@@ -1,5 +1,7 @@
 import {React, Fragment} from 'react';
 import Dashboard from './components/dashboard';
+import UserList from './components/usersList';
+import ProductList from './components/productList';
 import './App.css';
 
 function App() {
@@ -7,9 +9,10 @@ function App() {
     <Fragment>
       <Dashboard>
       </Dashboard>
-      <div>
-        <h1>Api rest java test</h1>
-      </div>
+      <UserList>
+      </UserList>
+      <ProductList>   
+      </ProductList>
     </Fragment>
   );
 }
