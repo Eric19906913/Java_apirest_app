@@ -1,6 +1,6 @@
 package com.Apirest.DAO;
 
-import java.sql.ResultSet;
+import java.sql.PreparedStatement;
 import java.util.List;
 
 
@@ -9,6 +9,7 @@ import javax.persistence.TypedQuery;
 import javax.transaction.Transactional;
 
 import org.hibernate.Session;
+import org.hibernate.loader.plan.exec.query.internal.SelectStatementBuilder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -57,28 +58,26 @@ public class UserDAOImpl implements UserDAO{
 		Session currentSession = entityManager.unwrap(Session.class);
 		
 		String query = "INSERT INTO users (name, email, phone, password, user_name) VALUES(?, ?, ?, ?, ?)";
-		
-		currentSession.createNativeQuery(query)
-			.setParameter(1, user.getName())
-			.setParameter(2, user.getEmail())
-			.setParameter(3, user.getPhone())
-			.setParameter(4, user.getPassword())
-			.setParameter(5, user.getUsername())
-			.executeUpdate();
-	}
 
+			currentSession.createNativeQuery(query)
+				.setParameter(1, user.getName())
+				.setParameter(2, user.getEmail())
+				.setParameter(3, user.getPhone())
+				.setParameter(4, user.getPassword())
+				.setParameter(5, user.getUsername())
+				.executeUpdate();
+	}
 	@Override
 	public User getByEmail(String email) {
 		Session currentSession = entityManager.unwrap(Session.class);
 		
 		String query = "SELECT * FROM users WHERE email=?";
 		
-		var user = currentSession.createNativeQuery(query)
-			.setParameter(1, email);
+		var result = currentSession.createNativeQuery(query)
+			.setParameter(1, email).getQueryReturns();
 		
-		System.out.println(user.toString());
-		
-		return null;
+		System.out.println(result);
+		return (User)result;
 	}
 
 }
