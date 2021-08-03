@@ -1,5 +1,6 @@
-import {React, useEffect, useState} from 'react';
+import {React, useEffect, useState, Fragment} from 'react';
 import axios from 'axios';
+import ProductData from './productData';
 
 const ProductList = () =>{
     const url = "http://localhost:8080/api/";
@@ -14,12 +15,20 @@ const ProductList = () =>{
         .catch((error) => console.log(error))
     }, [])
 
-    console.log(products);
-
     if(products == null) return;
 
     return(
-        <h1>hola</h1>
+        <Fragment>
+            {
+            products.map((product) => (
+                <ProductData
+                    key={product.id}
+                    product={product}
+                >
+                </ProductData>
+            ))
+            }     
+        </Fragment> 
     );
 } 
 

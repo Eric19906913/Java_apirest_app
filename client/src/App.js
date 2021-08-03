@@ -1,5 +1,5 @@
 import {React, Fragment} from 'react';
-import Dashboard from './components/dashboard';
+import Layout from './components/layout';
 import UserList from './components/usersList';
 import ProductList from './components/productList';
 import './App.css';
@@ -7,8 +7,8 @@ import './App.css';
 function App() {
   return (
     <Fragment>
-      <Dashboard>
-      </Dashboard>
+      <Layout>
+      </Layout>
       <UserList>
       </UserList>
       <ProductList>   
