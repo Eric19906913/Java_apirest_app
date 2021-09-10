@@ -11,8 +11,6 @@ function App() {
       </Layout>
       <UserList>
       </UserList>
-      <ProductList>   
-      </ProductList>
     </Fragment>
   );
 }

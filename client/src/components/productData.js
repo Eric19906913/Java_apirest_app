@@ -1,11 +1,12 @@
 import React from 'react';
+
 import { Card, CardHeader, CardContent } from '@material-ui/core';
 
 
 const ProductData = (product) => {
     
     const {name, description, price} = product.product;
-    console.log(product);
+    console.log(product.product);
     if(product == null) return;
 
     return(

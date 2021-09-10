@@ -1,4 +1,4 @@
-package com.Apirest.ProductEndPoint;
+package com.Apirest.Endpoints;
 
 import java.util.List;
 
