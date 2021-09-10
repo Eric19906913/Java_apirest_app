@@ -1,12 +1,18 @@
 package com.Apirest.Entity;
 
 import java.util.Date;
+import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.CreationTimestamp;
@@ -35,6 +41,9 @@ public class Product {
 	@Column(name="dischargeDate")
 	@CreationTimestamp
 	private Date dischargeDate;
+	
+	@ManyToMany
+	private List<Sell> sells;
 	
 	// default constructor
 	public Product() {}
