@@ -12,7 +12,6 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
-import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.CreationTimestamp;
@@ -42,7 +41,13 @@ public class Product {
 	@CreationTimestamp
 	private Date dischargeDate;
 	
-	@ManyToMany
+	@JoinTable(
+	        name = "rel_products_sells",
+	        joinColumns = @JoinColumn(name = "FK_PRODUCT", nullable = false),
+	        inverseJoinColumns = @JoinColumn(name="FK_SELL", nullable = false)
+	    )
+	
+	@ManyToMany(cascade = CascadeType.ALL)
 	private List<Sell> sells;
 	
 	// default constructor
