@@ -6,4 +6,5 @@ import com.Apirest.Entity.Product;
 
 public interface ProductDAO {
 	public List<Product> getAll();
+	public void saveProduct(Product product);
 }

@@ -1,6 +1,5 @@
 package com.Apirest.DAO;
 
-import java.sql.PreparedStatement;
 import java.util.List;
 
 
@@ -9,7 +8,6 @@ import javax.persistence.TypedQuery;
 import javax.transaction.Transactional;
 
 import org.hibernate.Session;
-import org.hibernate.loader.plan.exec.query.internal.SelectStatementBuilder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 

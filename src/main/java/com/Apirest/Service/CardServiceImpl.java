@@ -56,7 +56,8 @@ public class CardServiceImpl implements CardService{
 
 	@Override
 	public Card saveCard(String number, String description, int userId) {
-		Card card = new Card(number, description);
+		User newUser = new User();
+		Card card = new Card(number, description, newUser);
 		//search for the user here to create a new card that belongs to him.
 		User user = userDao.getById(userId);
 		Card newCard = cardDao.addNewCard(user, card);

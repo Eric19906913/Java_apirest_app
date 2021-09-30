@@ -5,6 +5,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -16,25 +18,24 @@ public class Card {
 	@Column(name="Id")
 	private int id;
 	
-	@Column(name="isValid")
-	private boolean isValid;
-	
 	@Column(name="number")
 	private String number;
 	
 	@Column(name="description")
 	private String description;
 	
-
-	public Card(String number) {
+	@ManyToOne
+    @JoinColumn(name = "FK_USER", nullable = false, updatable = false)
+    private User user;
+	
+	public Card(String number, User user) {
 		this.number = number;
 	}
 	
-	public Card(String number, String description){
+	public Card(String number, String description, User user){
 		this.description = description;
 		this.number = number;
 	}
-	
 
 	public int getId() {
 		return id;
@@ -42,14 +43,6 @@ public class Card {
 
 	public void setId(int id) {
 		this.id = id;
-	}
-
-	public boolean isValid() {
-		return isValid;
-	}
-
-	public void setValid(boolean isValid) {
-		this.isValid = isValid;
 	}
 
 	public String getNumber() {

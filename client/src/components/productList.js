@@ -3,6 +3,7 @@ import { Grid } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import axios from 'axios';
 import ProductData from './productData';
+import AddProduct from './addProduct';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -34,6 +35,8 @@ const ProductList = () =>{
 
     return(
         <Fragment>
+            <AddProduct>
+            </AddProduct>
             {
             products.map((product) => (
                 <Grid key={product.id} item xs={4}>

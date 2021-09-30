@@ -3,6 +3,7 @@ package com.Apirest.Entity;
 import java.util.Date;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -46,6 +47,9 @@ public class User {
 	
 	@Column(name="birthday")
 	private Date birthday;
+	
+	@OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
+    private List<Card> cards;
 
 	//default constructor
 	public User() {}

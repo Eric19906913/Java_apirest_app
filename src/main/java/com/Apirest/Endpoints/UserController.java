@@ -49,9 +49,7 @@ public class UserController {
 	public ResponseEntity<User> saveUser(@RequestBody User user) {
 		user.setId(0);
 		
-		var result = userService.saveUser(user);
-		
-		System.out.println("value of result: "+ result);
+		userService.saveUser(user);
 		
 		//returns the new user and a http status code 201
 		return new ResponseEntity<User>(user, HttpStatus.CREATED);
